@@ -1,4 +1,6 @@
+// Require Libraries
 const express = require('express')
+
 const app = express()
 const exphbs = require('express-handlebars');
 
@@ -13,6 +15,8 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
-
+app.post('/posts/new', (req, res) => {
+    res.render('posts-new');
+});
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
