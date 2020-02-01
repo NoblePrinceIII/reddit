@@ -1,22 +1,18 @@
-// Require Libraries
-const express = require('express')
+var express = require('express');
+var exphbs = require('express-handlebars');
 
-const app = express()
-const exphbs = require('express-handlebars');
-
-const port = 3000
-
-
+var app = express();
+require('./controllers/posts.js')(app);
 
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
-app.get('/', (req, res) => {
+app.get('/', function (req, res) {
     res.render('home');
 });
 
-app.post('/posts/new', (req, res) => {
+app.get('/posts/new', function (rew, res) {
     res.render('posts-new');
-});
+})
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(3000);
