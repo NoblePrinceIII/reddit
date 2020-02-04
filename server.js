@@ -24,12 +24,13 @@ require("./data/reddit-db");
 app.engine("handlebars", exphbs());
 app.set("view engine", "handlebars");
 
-app.get("/", function(req, res) {
-  res.render("home");
+app.get("/", function (req, res) {
+  res.render("posts-index");
 });
 
-app.get("/posts/new", function(rew, res) {
+app.get("/posts/new", function (rew, res) {
   res.render("posts-new");
 });
+
 
 app.listen(3000);
