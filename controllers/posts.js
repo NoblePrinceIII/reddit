@@ -1,17 +1,24 @@
 const Post = require('../models/post');
 
-module.exports = app => {
+module.exports = (app) => {
+
     // CREATE
-    app.post("/posts/new", (req, res) => {
+    app.post('/posts/new', (req, res) => {
+        // INSTANTIATE INSTANCE OF POST MODEL
         const post = new Post(req.body);
 
+
         post.save((err, post) => {
-            console.log(err);
-            console.log(post);
+            console.log(err)
+            console.log(post)
+            // REDIRECT TO THE ROOT
             return res.redirect(`/`);
         })
     });
-    app.get("/", (req, res) => {
+
+
+    app.get('/', (req, res) => {
+
         Post.find({})
             .then(posts => {
                 res.render("posts-index", {
@@ -19,19 +26,34 @@ module.exports = app => {
                 });
             })
             .catch(err => {
-                console.log('error', err.message);
+                console.log(err.message);
             });
     });
-    app.get("/posts/:id", function (req, res) {
-        // Display Post
+
+    app.get('/posts/:id', function (req, res) {
         Post.findById(req.params.id)
             .then(post => {
-                res.render("posts-show", {
+                res.render('posts-show', {
                     post
                 });
             })
             .catch(err => {
                 console.log(err.message);
+            });
+    });
+
+    // SUBREDDIT
+    app.get("/n/:subreddit", function (req, res) {
+        Post.find({
+                subreddit: req.params.subreddit
+            })
+            .then(posts => {
+                res.render("posts-index", {
+                    posts
+                });
+            })
+            .catch(err => {
+                console.log(err);
             });
     });
 
