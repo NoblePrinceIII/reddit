@@ -16,8 +16,12 @@ const PostSchema = new Schema({
     },
     subreddit: {
         type: String,
-        required: true
+        required: false
     },
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Comment'
+    }]
 });
 
 module.exports = mongoose.model("Post", PostSchema)
