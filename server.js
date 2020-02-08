@@ -1,11 +1,20 @@
 const express = require("express");
+var cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
+
 const app = express();
+
+
 const port = 3000;
 require('dotenv').config();
 
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const expressValidator = require("express-validator");
+
+app.use(cookieParser()); // Add this after you initialize express.
+
+
 
 // Use Body Parser
 app.use(bodyParser.json());
