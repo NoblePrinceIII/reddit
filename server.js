@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 3000;
+require('dotenv').config();
 
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
@@ -29,6 +30,7 @@ app.get("/posts/new", (req, res) => res.render("posts-new"));
 //Controllers
 require("./controllers/posts")(app);
 require('./controllers/comments.js')(app);
+require('./controllers/auth.js')(app);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 

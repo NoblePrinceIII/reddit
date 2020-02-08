@@ -13,12 +13,18 @@
   "author": "Farhan Begg",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.8",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
     "core-util-is": "^1.0.2",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "express-validator": "^5.3.1",
-    "mongoose": "^5.8.11"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.11",
+    "peer": "^0.2.10"
   },
   "devDependencies": {
     "chai": "^4.2.0",
