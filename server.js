@@ -16,6 +16,7 @@ app.use(cookieParser()); // Add this after you initialize express.
 
 
 
+
 // Use Body Parser
 app.use(bodyParser.json());
 app.use(
@@ -35,6 +36,24 @@ require("./data/reddit-db");
 
 // app.get('/', (req, res) => res.render('posts-index'))
 app.get("/posts/new", (req, res) => res.render("posts-new"));
+
+
+// Checks Authentication 
+var checkAuth = (req, res, next) => {
+  console.log("Checking authentication");
+  if (typeof req.cookies.nToken === "undefined" || req.cookies.nToken === null) {
+    req.user = null;
+  } else {
+    var token = req.cookies.nToken;
+    var decodedToken = jwt.decode(token, {
+      complete: true
+    }) || {};
+    req.user = decodedToken.payload;
+  }
+
+  next();
+};
+app.use(checkAuth);
 
 //Controllers
 require("./controllers/posts")(app);
