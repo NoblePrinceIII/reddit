@@ -34,14 +34,7 @@ app.set("view engine", "handlebars");
 // set db
 require("./data/reddit-db");
 
-// app.get('/', (req, res) => res.render('posts-index'))
-app.get("/posts/new", (req, res) => {
-  var currentUser = req.user;
 
-  res.render("posts-new", {
-    currentUser
-  });
-});
 
 // Checks Authentication 
 var checkAuth = (req, res, next) => {
@@ -59,6 +52,16 @@ var checkAuth = (req, res, next) => {
   next();
 };
 app.use(checkAuth);
+
+
+// app.get('/', (req, res) => res.render('posts-index'))
+app.get("/posts/new", (req, res) => {
+  var currentUser = req.user;
+  console.log(currentUser);
+  res.render("posts-new", {
+    currentUser
+  });
+});
 
 //Controllers
 require("./controllers/posts")(app);

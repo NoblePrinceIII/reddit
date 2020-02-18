@@ -1,4 +1,5 @@
 const Post = require("../models/post");
+const User = require("../models/user");
 
 module.exports = app => {
     // CREATE
@@ -10,7 +11,9 @@ module.exports = app => {
             post
                 .save()
                 .then(post => {
+                    console.log(req.user._id)
                     return User.findById(req.user._id);
+
                 })
                 .then(user => {
                     user.posts.unshift(post);
