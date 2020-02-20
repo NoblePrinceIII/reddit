@@ -1,27 +1,26 @@
-const User = require("../models/user");
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken')
+const User = require('../models/user')
 
-module.exports = app => {
+module.exports = (app) => {
     // SIGN UP FORM
     app.get("/sign-up", (req, res) => {
         res.render("sign-up");
     });
+
     // SIGN UP POST
     app.post("/sign-up", (req, res) => {
-        // Create User and JWT
+        // Create User
         const user = new User(req.body);
 
         user
             .save()
             .then(user => {
                 var token = jwt.sign({
-                        _id: user._id
-                    },
-                    process.env.SECRET, {
-                        expiresIn: "60 days"
-                    }
-                );
-                res.cookie("nToken", token, {
+                    _id: user._id
+                }, process.env.SECRET, {
+                    expiresIn: "60 days"
+                });
+                res.cookie('nToken', token, {
                     maxAge: 900000,
                     httpOnly: true
                 });
@@ -34,20 +33,23 @@ module.exports = app => {
                 });
             });
     });
+
     // LOGOUT
-    app.get("/logout", (req, res) => {
-        res.clearCookie("nToken");
-        res.redirect("/");
-    });
-    // LOGIN FORM
-    app.get('/login', (req, res) => {
-        res.render('login');
-    });
+    app.get('/logout', (req, res) => {
+        res.clearCookie('nToken');
+        res.redirect('/');
+    })
+
     // LOGIN
-    app.post("/login", (req, res) => {
+    app.get('/login', (req, res) => {
+        res.render('login')
+    })
+
+    // LOGIN POST
+    app.post('/login', (req, res) => {
         const username = req.body.username;
         const password = req.body.password;
-        // Find this user name
+
         User.findOne({
                 username
             }, "username password")
@@ -85,4 +87,4 @@ module.exports = app => {
                 console.log(err);
             });
     });
-};
+}

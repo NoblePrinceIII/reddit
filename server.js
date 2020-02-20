@@ -14,9 +14,6 @@ const expressValidator = require("express-validator");
 
 app.use(cookieParser()); // Add this after you initialize express.
 
-
-
-
 // Use Body Parser
 app.use(bodyParser.json());
 app.use(
