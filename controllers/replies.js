@@ -1,6 +1,6 @@
-var Post = require("../models/post");
-var Comment = require("../models/comments");
-var User = require("../models/user");
+const Post = require("../models/post");
+const Comment = require("../models/comments");
+const User = require("../models/user");
 
 module.exports = app => {
     // NEW REPLY
@@ -19,10 +19,10 @@ module.exports = app => {
             })
             .catch(err => {
                 console.log(err.message);
-            });
-    });
+            })
+    })
 
-    // CREATE REPLY
+    /// CREATE REPLY
     app.post("/posts/:postId/comments/:commentId/replies", (req, res) => {
         // TURN REPLY INTO A COMMENT OBJECT
         const reply = new Comment(req.body);
@@ -51,6 +51,4 @@ module.exports = app => {
                 return post.save();
             })
     });
-
-
-};
+}
