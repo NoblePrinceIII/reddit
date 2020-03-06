@@ -12,6 +12,7 @@ const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const expressValidator = require("express-validator");
 
+
 app.use(express.static('public'))
 app.use(cookieParser()); // Add this after you initialize express.
 
